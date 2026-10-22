@@ -1,0 +1,87 @@
+body{
+    margin: 0;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    margin: 150px 180px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.left{
+    background: linear-gradient(to bottom, #1565C0, #0d3f7a);
+    color: #FFFFFF;
+}
+
+.left .avata{
+    width: 150px;
+    height: 150px;
+    margin: 50px 50px 0;
+    border-radius: 100%;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left .avata p{
+    color: #1565C0;
+    font-size: 50px;
+    font-weight: 700;
+}
+
+.left .name p{
+    text-align: center;
+}
+
+.left .name p:first-child{
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.left .name p:last-child{
+    font-size: 15px;
+    margin-top: 0;
+}
+
+.left .info{
+    margin: 0 20px 50px 20px;
+}
+
+.left .info a{
+    color: #FFFFFF;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.right{
+    margin: 30px;
+}
+
+.right .title{
+    color:#1565C0;
+    border-bottom: 2px solid grey;
+}
+
+.right .title p{
+    font-size: 20px;
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+.right .text p a{
+    color: #1565C0;
+    text-decoration: none;
+}
+
+.right .text .text-skills span{
+    color: #0d3f7a;
+    background-color: #e3f0ff;
+    margin: 5px;
+    padding: 2px 10px;
+    border-radius: 20px;
+}

@@ -1,0 +1,81 @@
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    margin: 0;
+}
+
+.title{
+    border-bottom: 3px solid #1668C1;
+}
+
+.title p{
+    color: #1668C1;
+    font-size: 30px;
+    font-weight: 700;
+    padding: 0 20px;
+}
+
+.container{
+    display: flex;
+}
+
+.container .nav{
+    padding: 0 100px 0 20px;
+    background-color: lightcyan;
+    line-height: 1.5;
+    font-size: 18px;
+}
+
+.container .nav p{
+    color: gray;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.container .list a{
+    color: #1668C1;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.content{
+    width: 100%;
+    padding: 20px;
+}
+
+.content .title-mini{
+    background-color: #1668C1;
+    color: #FFFFFF;
+    border-radius: 3px;
+}
+
+.content .title-mini p{
+    padding: 5px 5px;
+    font-size: 15px;
+}
+
+.content .text .text-title{
+    color: #1668C1;
+    font-weight: 700;
+}
+
+.content .text-main{
+    display: flex;
+}
+
+.content .text .text-main{
+    border-bottom: 1px dashed #1668C1;
+    margin: 5px;
+}
+
+.content .text-main .img{
+    margin-left: auto;
+    border-radius: 3px;
+}
+
+.content .text-main .img img{
+    width: 100px;
+    border-radius: 3px;
+}

@@ -1,0 +1,35 @@
+*{
+    background-color: #FFFDE7;
+}
+
+body{
+    margin: 0;
+    min-height: 100vh;
+    border: 3px solid #9E9E9E;
+}
+
+h1{
+    color: #D40000;
+    background-color: #FFD9E6;
+    text-align: center;
+}
+
+.p1{
+    color: #0033CC;
+    font-style:italic;
+    text-align: center;
+    font-size: xx-large;
+}
+
+.p2{
+    color: #D40000;
+    font-style: italic;
+    text-align: center;
+    font-size: xx-large;
+}
+
+hr{
+    width: 55%;
+    height: 1px;
+    background-color: #0033CC;
+}

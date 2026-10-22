@@ -1,0 +1,93 @@
+*{
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background-color: #fed7aa;
+}
+
+.container{
+    width: 800px;
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    margin: 0;
+}
+
+.content{
+    margin: 20px;
+}
+
+.content .title p:first-child{
+    color: #c2410c;
+    font-size: 25px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.content .title p:last-child{
+    color: grey;
+    margin: 0 0 10px 0;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+form .in{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.in label{
+    font-weight: 700;
+}
+
+.in input{
+    height: 35px;
+    padding: 15px;
+    font-size: 15px;
+    font-weight: 700;
+    border: 2px solid #000000;
+    border-radius: 8px;
+}
+
+.in .message{
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.in.error input{
+    border-color: #dc2626;
+}
+
+.in.error .message{
+    color: #dc2626;
+}
+
+.in.success input{
+    border-color: #16a34a;
+}
+
+.in.success .message{
+    color: #16a34a;
+}
+
+form button{
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    color: #FFFFFF;
+    background-color: #c2410c;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+}

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bai16.css">
+    <title>Bai16</title>
+</head>
+<body>
+    <div class="container">
+        <div class="title">
+            <p>
+                Danh sách việc cần làm
+            </p>
+
+            <p>
+                Thêm việc mới, đánh dấu hoàn thành hoặc xóa &minus; tất cả bằng JavaScript.
+            </p>
+        </div>
+
+        <div class="input">
+            <input type="text" id="taskInput" placeholder="Nhập công việc mới...">
+            <button onclick="addTask()">Thêm</button>
+        </div>
+
+        <div class="list" id="taskList">
+            
+        </div>
+
+        <div class="wait" id="taskWait">
+            Còn 0 việc chưa hoàn thành
+        </div>
+    </div>
+
+    <script src="bai16.js"></script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách việc cần làm - Bài 16</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Khung ứng dụng chính */
+        .todo-app {
+            background-color: #FFFFFF;
+            width: 600px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* Tiêu đề */
+        .todo-header {
+            background-color: #6d28d9;
+            color: #FFFFFF;
+            padding: 20px 24px;
+        }
+
+        .todo-header h1 {
+            font-size: 22px;
+            margin-bottom: 6px;
+        }
+
+        .todo-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Phần nhập liệu */
+        .todo-input-section {
+            padding: 20px 24px;
+            display: flex;
+            gap: 12px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .todo-input-section input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .todo-input-section input:focus {
+            border-color: #6d28d9;
+        }
+
+        .todo-input-section button {
+            background-color: #6d28d9;
+            color: #FFFFFF;
+            border: none;
+            padding: 0 20px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .todo-input-section button:hover {
+            background-color: #5b21b6;
+        }
+
+        /* Danh sách việc */
+        .todo-list-container {
+            padding: 10px 24px;
+            max-height: 280px;
+            overflow-y: auto;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px dashed #ede9fe;
+        }
+
+        .todo-item:last-child {
+            border-bottom: none;
+        }
+
+        .todo-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        /* Ô đánh dấu trạng thái */
+        .todo-checkbox {
+            width: 22px;
+            height: 22px;
+            border: 2px solid #a78bfa;
+            border-radius: 6px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        /* Nội dung chữ công việc */
+        .todo-text {
+            font-size: 16px;
+            color: #1f2937;
+        }
+
+        /* Trạng thái khi hoàn thành */
+        .todo-item.completed .todo-checkbox {
+            background-color: #6d28d9;
+            border-color: #6d28d9;
+        }
+
+        .todo-item.completed .todo-checkbox::after {
+            content: "✓";
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .todo-item.completed .todo-text {
+            text-decoration: line-through;
+            color: #9ca3af;
+        }
+
+        /* Nút xoá */
+        .btn-delete {
+            background-color: #fde2e2;
+            color: #b91c1c;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn-delete:hover {
+            opacity: 0.8;
+        }
+
+        /* Phần thống kê số việc còn lại */
+        .todo-footer {
+            padding: 16px 24px;
+            background-color: #faf5ff;
+            border-top: 1px solid #e5e7eb;
+            font-size: 14px;
+            color: #4b5563;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="todo-app">
+        <!-- Tiêu đề -->
+        <div class="todo-header">
+            <h1>Danh sách việc cần làm[cite: 2]</h1>
+            <p>Thêm việc mới, đánh dấu hoàn thành hoặc xoá — tất cả bằng JavaScript[cite: 2].</p>
+        </div>
+
+        <!-- Ô nhập và nút Thêm -->
+        <div class="todo-input-section">
+            <input type="text" id="taskInput" placeholder="Nhập công việc mới...">
+            <button onclick="addTask()">Thêm</button>
+        </div>
+
+        <!-- Danh sách hiển thị công việc -->
+        <div class="todo-list-container" id="taskList">
+            <!-- Các công việc sẽ được thêm tự động bằng JS ở đây -->
+        </div>
+
+        <!-- Số việc còn lại -->
+        <div class="todo-footer" id="taskCounter">
+            Còn 0 việc chưa hoàn thành
+        </div>
+    </div>
+
+    <script>
+        // Mảng lưu trữ danh sách công việc
+        let tasks = [
+            { text: "Đọc chương HTML5 cơ bản", completed: true },
+            { text: "Làm bài tập CSS Grid", completed: false },
+            { text: "Quay video OBS nộp bài", completed: false }
+        ];
+
+        // Lấy các phần tử DOM cần thao tác
+        const taskInput = document.getElementById("taskInput");
+        const taskList = document.getElementById("taskList");
+        const taskCounter = document.getElementById("taskCounter");
+
+        // Hàm hiển thị danh sách ra màn hình
+        function renderTasks() {
+            taskList.innerHTML = "";
+            let remainingCount = 0;
+
+            tasks.forEach((task, index) => {
+                if (!task.completed) {
+                    remainingCount++;
+                }
+
+                // Tạo khung cho từng công việc
+                const itemDiv = document.createElement("div");
+                itemDiv.className = `todo-item ${task.completed ? "completed" : ""}`;
+
+                // Phần nội dung (Click để đổi trạng thái hoàn thành)
+                const contentDiv = document.createElement("div");
+                contentDiv.className = "todo-content";
+                contentDiv.onclick = () => toggleTask(index);
+
+                const checkboxDiv = document.createElement("div");
+                checkboxDiv.className = "todo-checkbox";
+
+                const textSpan = document.createElement("span");
+                textSpan.className = "todo-text";
+                textSpan.textContent = task.text;
+
+                contentDiv.appendChild(checkboxDiv);
+                contentDiv.appendChild(textSpan);
+
+                // Nút xoá
+                const deleteBtn = document.createElement("button");
+                deleteBtn.className = "btn-delete";
+                deleteBtn.textContent = "Xoá";
+                deleteBtn.onclick = () => deleteTask(index);
+
+                // Lắp ráp các thành phần lại
+                itemDiv.appendChild(contentDiv);
+                itemDiv.appendChild(deleteBtn);
+                taskList.appendChild(itemDiv);
+            });
+
+            // Cập nhật số việc chưa hoàn thành ở cuối danh sách
+            taskCounter.textContent = `Còn ${remainingCount} việc chưa hoàn thành`;
+        }
+
+        // Hàm thêm công việc mới
+        function addTask() {
+            const text = taskInput.value.trim();
+            if (text === "") {
+                alert("Vui lòng nhập nội dung công việc!");
+                return;
+            }
+
+            tasks.push({ text: text, completed: false });
+            taskInput.value = ""; // Xóa ô nhập sau khi thêm
+            renderTasks();        // Vẽ lại giao diện tức thì
+        }
+
+        // Hàm đổi trạng thái hoàn thành (gạch ngang / bỏ gạch ngang)
+        function toggleTask(index) {
+            tasks[index].completed = !tasks[index].completed;
+            renderTasks();
+        }
+
+        // Hàm xoá công việc khỏi danh sách
+        function deleteTask(index) {
+            tasks.splice(index, 1);
+            renderTasks();
+        }
+
+        // Chạy lần đầu khi tải trang để hiển thị dữ liệu mẫu
+        renderTasks();
+    </script>
+
+</body>
+</html>

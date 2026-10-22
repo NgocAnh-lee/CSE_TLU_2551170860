@@ -1,0 +1,147 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #FFFFFF;
+    width: 600px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.title {
+    background-color: #6d28d9;
+    color: #FFFFFF;
+    padding: 20px 24px;
+}
+
+.title p:first-child {
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
+.title p:last-child {
+    font-size: 15px;
+}
+
+.input {
+    padding: 20px 24px;
+    display: flex;
+    gap: 12px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.input input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+}
+
+.input button {
+    background-color: #6d28d9;
+    color: #FFFFFF;
+    border: none;
+    padding: 0 20px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.input button:hover {
+    background-color: darkviolet;
+}
+
+.list{
+    padding: 10px 24px;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.task{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+}
+
+.task:last-child {
+    border-bottom: none;
+}
+
+.text {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    flex: 1;
+}
+
+.task-checkbox {
+    width: 22px;
+    height: 22px;
+    border: 2px solid #a78bfa;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.task-text {
+    font-size: 16px;
+    color: #1f2937;
+}
+
+.task.completed .task-checkbox {
+    background-color: #6d28d9;
+    border-color: #6d28d9;
+}
+
+.task.completed .task-checkbox::after {
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.task.completed .task-text {
+    text-decoration: line-through;
+    color: #9ca3af;
+}
+
+.delete {
+    background-color: #fde2e2;
+    color: #b91c1c;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.deleteTask:hover {
+    opacity: 0.8;
+}
+
+.wait {
+    padding: 16px 24px;
+    background-color: #FFFFFF;
+    border-top: 1px solid #FFFFFF;
+    font-size: 14px;
+    color: #4b5563;
+}
